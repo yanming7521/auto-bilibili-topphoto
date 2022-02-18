@@ -101,20 +101,12 @@ async function getLastPubDistance() {
   }
 }
 
-async function getFansInfo() {
-  const order = "desc";
-  const orderType = "attention";
+async function getFollowers() {
   const url =
     "http://api.bilibili.com/x/relation/followers?" +
-    "vmid=" +
-    DEDEUSERID +
-    "&order=" +
-    order +
-    "&order_type=" +
-    orderType;
+    "vmid=" + DEDEUSERID + "&order=desc&order_type=attention";
 
   let list = [];
-
   for (let i = 1; i <= 5; i++) {
     try {
       const res = await axios.request(url + "&pn=" + i);
@@ -137,7 +129,7 @@ async function painting() {
   ctx.drawImage(bgImage, 0, 0, canvasSize.w, canvasSize.h);
 
   //获得粉丝数据
-  const infos = await getFansInfo();
+  const infos = await getFollowers();
   let face;
   // 2560 * 400 = x * 250
   // x = 4096
@@ -160,18 +152,18 @@ async function painting() {
   //let days = await getLastPubDistance();
 
   //设置文字颜色和字号，字体
-  //   ctx.fillStyle = "#e6433a";
-  //   ctx.font = "72px digit";
+    ctx.fillStyle = "#e6433a";
+    ctx.font = "72px digit";
 
   //获得粉丝数
-  //   let count = await getFansCount();
+    let count = await getFansCount();
   //计算文字尺寸
-  //   let size = ctx.measureText(count);
-  //   const txt_x = 2020;
-  //   const txt_y = 135;
+    let size = ctx.measureText(count);
+    const txt_x = 2020;
+    const txt_y = 135;
 
   //转换后续的transform的基点
-  //ctx.translate(txt_x, txt_y);
+  ctx.translate(txt_x, txt_y);
 
   /*
     a	水平缩放绘图
@@ -181,17 +173,17 @@ async function painting() {
     e	水平移动绘图
     f	垂直移动绘图
     */
-  //ctx.transform(1, -0.4, 0, 1, 0, 0);
+  ctx.transform(1, -0.4, 0, 1, 0, 0);
 
   //将文字绘制到指定坐标
-  //ctx.fillText(count, -size.width / 2, 0);
+  ctx.fillText(count, -size.width / 2, 0);
 
   //canvas转base64编码后上传
   const base64 = encodeURIComponent(
     canvas.toDataURL("image/png").substring(22)
   );
   postTopPhoto(base64);
-  // saveCanvasToImage("./bg_preview.jpg");
+  saveCanvasToImage("./bg_preview.jpg");
 }
 
 painting();
