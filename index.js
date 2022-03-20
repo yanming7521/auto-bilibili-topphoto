@@ -152,18 +152,18 @@ async function painting() {
   //let days = await getLastPubDistance();
 
   //设置文字颜色和字号，字体
-    ctx.fillStyle = "#e6433a";
-    ctx.font = "72px digit";
+  //ctx.fillStyle = "#e6433a";
+  //ctx.font = "72px digit";
 
   //获得粉丝数
-    let count = await getFansCount();
+  //let count = await getFansCount();
   //计算文字尺寸
-    let size = ctx.measureText(count);
-    const txt_x = 2020;
-    const txt_y = 135;
+  //let size = ctx.measureText(count);
+  //const txt_x = 2020;
+  //const txt_y = 135;
 
   //转换后续的transform的基点
-  ctx.translate(txt_x, txt_y);
+  //ctx.translate(txt_x, txt_y);
 
   /*
     a	水平缩放绘图
@@ -173,10 +173,10 @@ async function painting() {
     e	水平移动绘图
     f	垂直移动绘图
     */
-  ctx.transform(1, -0.4, 0, 1, 0, 0);
+  //ctx.transform(1, -0.4, 0, 1, 0, 0);
 
   //将文字绘制到指定坐标
-  ctx.fillText(count, -size.width / 2, 0);
+  //ctx.fillText(count, -size.width / 2, 0);
 
   //canvas转base64编码后上传
   const base64 = encodeURIComponent(
